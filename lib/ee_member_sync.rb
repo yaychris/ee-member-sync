@@ -87,16 +87,17 @@ module EEMemberSync
     end
     
     module InstanceMethods
-      def fetch_ee_session(sess_id = nil)
+      def fetch_ee_session(ee_sess_id = nil)
         session[:ee_session] = {}
 
-        sess = sess_id || cookies[:exp_sessionid] 
+        sess = ee_sess_id || cookies[:exp_sessionid] 
         return if sess.blank?
 
-        begin
-          data = ActiveRecord::Base.connection.select_all("SELECT * FROM `exp_sessions`
+        data = begin
+          ActiveRecord::Base.connection.select_all("SELECT * FROM `exp_sessions`
           WHERE `session_id` = #{ActiveRecord::Base.sanitize(sess)}").shift
         rescue
+          nil
         end
 
         data = data || {}
