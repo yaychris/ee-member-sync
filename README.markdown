@@ -7,6 +7,8 @@ EE Member Sync is a Rails plugin to sync users from ExpressionEngine to a model 
 * a model class method and an instance method to sync a specific member ID
 * a model instance method to update the member's group
 
+This plugin is tested against EE 1.6.5.
+
 
 Usage
 =====
