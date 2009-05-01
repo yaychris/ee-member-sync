@@ -9,7 +9,14 @@ module EEMemberSync
     module ClassMethods
 
       def sync_with_ee(ee_id)
-        update_from_ee(ee_id)
+        ee_data = fetch_ee_data(ee_id)
+        return nil if ee_data.blank?
+
+        ee_data.symbolize_keys!
+
+        member = find_or_initialize_by_ee_id(ee_data[:ee_id])
+        member.update_attributes(ee_data)
+        member
       end
 
       def fetch_ee_groups
@@ -26,17 +33,6 @@ module EEMemberSync
 
 
       protected
-
-      def update_from_ee(id)
-        ee_data = fetch_ee_data(id)
-        return nil if ee_data.blank?
-
-        ee_data.symbolize_keys!
-
-        member = find_or_initialize_by_ee_id(ee_data[:ee_id])
-        member.update_attributes(ee_data)
-        member
-      end
 
       def fetch_ee_data(id)
         begin
