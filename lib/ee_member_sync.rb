@@ -92,6 +92,8 @@ module EEMemberSync
     
     module InstanceMethods
       def fetch_ee_session(sess_id = nil)
+        session[:ee_session] = {}
+
         sess = sess_id || cookies[:exp_sessionid] 
         return if sess.blank?
 

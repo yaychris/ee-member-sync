@@ -58,6 +58,16 @@ class EEMemberSyncControllerTest < ActionController::TestCase
             assert_equal({}, session[:ee_session])
           end
         end
+
+        context "which is nil" do
+          setup do
+            get :param
+          end
+
+          should "set session[:ee_session] to an empty hash" do
+            assert_equal({}, session[:ee_session])
+          end
+        end
       end
 
     end
