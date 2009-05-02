@@ -103,6 +103,7 @@ TODO
 * add a generator for the migration
 * validations for model attributes?
 * update the EE cookie so it doesn't expire if the user is only in the Rails app
+* validate the user's IP/UA against the IP/UA in the EE session
 
 
 
